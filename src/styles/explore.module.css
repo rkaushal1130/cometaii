@@ -1,3 +1,225 @@
+/* ---- Explore Hero Banner ---- */
+.exploreHeroBanner {
+  background: linear-gradient(180deg, #0c2150 0%, #0d2258 50%, #0a1b46 100%);
+  color: #ffffff;
+  padding: 64px 24px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.exploreHeroBanner::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.exploreHeroInner {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.exploreBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #93bbfc;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.exploreHeroTitle {
+  font-family: var(--heading);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.exploreHeroTitle span {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.exploreHeroSubtitle {
+  font-family: var(--body);
+  font-size: clamp(16px, 2vw, 19px);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ---- Sticky Explore Navbar ---- */
+.exploreNavbarWrapper {
+  position: sticky;
+  top: 84px;
+  z-index: 850;
+  width: 100%;
+  background: rgba(12, 33, 80, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transition: top 0.3s ease;
+}
+
+.exploreNavbarWrapper.scrolledNav {
+  top: 76px;
+}
+
+.exploreNavContainer {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 clamp(24px, 3.5vw, 48px);
+  margin: 0 auto;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.exploreNavBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.exploreNavBrandIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.25);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  color: #60a5fa;
+}
+
+.exploreNavLinks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 0;
+}
+
+.exploreNavLinks::-webkit-scrollbar {
+  display: none;
+}
+
+.navLinkBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.navLinkBtn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.activeNavLink {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  border-color: rgba(96, 165, 250, 0.4) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+}
+
+.navBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.activeNavLink .navBadge {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+/* Section Headers */
+.sectionHeaderWrapper {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sectionBadge {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+  color: #2563eb;
+  margin-bottom: 14px;
+}
+
+.sectionSubtitle {
+  font-size: 17px;
+  color: var(--text);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 .exploreContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -345,7 +567,34 @@
   font-weight: 700;
   color: #0f172a;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   letter-spacing: -0.01em;
+}
+
+@media (max-width: 900px) {
+  .exploreNavbarWrapper {
+    top: 72px;
+  }
+  .exploreNavbarWrapper.scrolledNav {
+    top: 68px;
+  }
+  .exploreNavContainer {
+    height: 58px;
+    padding: 0 16px;
+    justify-content: flex-start;
+  }
+  .exploreNavBrand {
+    display: none;
+  }
+  .exploreNavLinks {
+    width: 100%;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+  .navLinkBtn {
+    padding: 8px 14px;
+    font-size: 13px;
+    gap: 6px;
+  }
 }
 

@@ -15,6 +15,18 @@
   --respect: #f2811d;
   --learning: #6d3bd4;
   --responsibility: #e0396f;
+  --accent: #2563eb;
+  --accent-border: #93bbfc;
+  --accent-bg: rgba(37, 99, 235, 0.15);
+  --border: #e2e8f0;
+  --bg: #ffffff;
+  --text: #475569;
+  --text-h: #0f172a;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --code-bg: #0f172a;
+  --heading: 'Space Grotesk', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: monospace;
 }
 
 * {
