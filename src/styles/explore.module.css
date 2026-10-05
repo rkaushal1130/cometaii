@@ -1,23 +1,23 @@
 /* ---- Explore Hero Section ---- */
 .exploreHeroBanner {
-  background: radial-gradient(circle at 80% 30%, #0d2358 0%, #08163d 55%, #050c22 100%);
-  color: #ffffff;
+  background: #ffffff;
+  color: #0f172a;
   padding: 44px clamp(24px, 3.5vw, 48px) 52px;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .exploreHeroBanner::before {
   content: '';
   position: absolute;
-  top: -120px;
-  left: 20%;
-  width: 760px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(99, 102, 241, 0.1) 45%, transparent 70%);
+  top: -100px;
+  right: 10%;
+  width: 500px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 70%);
   pointer-events: none;
-  filter: blur(50px);
+  filter: blur(40px);
 }
 
 .exploreHeroInner {
@@ -44,14 +44,12 @@
 .tabs {
   display: inline-flex;
   align-items: center;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   border-radius: 9999px;
   padding: 5px;
   gap: 4px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .tab {
@@ -62,7 +60,7 @@
   border-radius: 9999px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.72);
+  color: #64748b;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -73,15 +71,15 @@
 }
 
 .tab:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .activeTab {
   color: #ffffff !important;
   background: #2563eb !important;
   font-weight: 600 !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .tabBadge {
@@ -94,12 +92,14 @@
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.18);
-  color: #ffffff;
+  background: #e2e8f0;
+  color: #475569;
+  transition: all 0.2s ease;
 }
 
 .activeTab .tabBadge {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 .heroContent {
@@ -115,9 +115,9 @@
   gap: 8px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(37, 99, 235, 0.18);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  color: #93bbfc;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -129,14 +129,14 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(36px, 5vw, 54px);
   font-weight: 800;
-  color: #ffffff;
+  color: #0f172a;
   line-height: 1.15;
   margin-bottom: 14px;
   letter-spacing: -0.025em;
 }
 
 .exploreHeroTitle span {
-  background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 50%, #c4b5fd 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #4f46e5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -145,7 +145,7 @@
 .exploreHeroSubtitle {
   font-family: 'Inter', sans-serif;
   font-size: clamp(15px, 1.8vw, 18px);
-  color: rgba(255, 255, 255, 0.74);
+  color: #475569;
   line-height: 1.65;
   max-width: 680px;
   margin: 0;
