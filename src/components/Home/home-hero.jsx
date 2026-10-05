@@ -1,5 +1,5 @@
 import styles from './home-hero.module.css'
-import heroBg from '../../assets/images/webp/hero_bg.webp'
+import heroBg from '../../assets/images/hero_event_group.png'
 
 export default function HomeHero() {
   return (

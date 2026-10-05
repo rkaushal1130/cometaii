@@ -8,7 +8,7 @@
   overflow: hidden;
   padding: 60px 0 80px;
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
   background-repeat: no-repeat;
 }
 
@@ -17,7 +17,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 23, 51, 0.45);
+  background: rgba(5, 12, 34, 0.42);
   z-index: 1;
 }
 
@@ -26,9 +26,10 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(8, 23, 51, 0.7) 0%,
-    rgba(8, 23, 51, 0.4) 40%,
-    rgba(8, 23, 51, 0.15) 100%
+    rgba(5, 12, 34, 0.9) 0%,
+    rgba(5, 12, 34, 0.75) 45%,
+    rgba(5, 12, 34, 0.3) 80%,
+    rgba(5, 12, 34, 0.38) 100%
   );
   z-index: 2;
   pointer-events: none;
@@ -49,8 +50,8 @@
 .wrap {
   position: relative;
   z-index: 3;
-  max-width: 620px;
-  padding: 0 40px;
+  max-width: 640px;
+  padding: 0 clamp(24px, 3.5vw, 48px);
 }
 
 /* ---- Badge ---- */
@@ -446,6 +447,19 @@
 /* ---- Responsive ---- */
 
 @media (max-width: 900px) {
+  .hero {
+    background-position: center top;
+  }
+
+  .gradientOverlay {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 12, 34, 0.88) 0%,
+      rgba(5, 12, 34, 0.78) 50%,
+      rgba(5, 12, 34, 0.9) 100%
+    );
+  }
+
   .hero h1 { font-size: 48px; }
 
   .founders {
