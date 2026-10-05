@@ -71,199 +71,72 @@
   margin: 0 auto 36px;
 }
 
-/* ---- Modern Segmented Pill Control ---- */
-.pillSwitchWrapper {
+/* ---- Simple, Attractive Segmented Tab Control ---- */
+.tabsWrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 36px;
+  margin-top: 8px;
 }
 
-.pillSwitcher {
+.tabs {
   display: inline-flex;
   align-items: center;
-  background: rgba(10, 24, 58, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 9999px;
-  padding: 6px;
-  gap: 6px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  max-width: 100%;
-  flex-wrap: wrap;
+  padding: 5px;
+  gap: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
-.pillButton {
-  position: relative;
+.tab {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 22px;
+  padding: 10px 24px;
   border-radius: 9999px;
   background: transparent;
-  border: 1px solid transparent;
-  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  color: rgba(255, 255, 255, 0.72);
   font-family: 'Inter', sans-serif;
   font-size: 14.5px;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 
-.pillButton:hover {
+.tab:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px);
 }
 
-.activePill {
+.activeTab {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-  border-color: rgba(147, 187, 252, 0.4) !important;
+  background: #2563eb !important;
   font-weight: 600 !important;
-  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
-.pillCount {
+.tabBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 20px;
+  min-width: 18px;
+  height: 18px;
   padding: 0 6px;
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
 }
 
-.activePill .pillCount {
+.activeTab .tabBadge {
   background: rgba(255, 255, 255, 0.28);
-}
-
-/* ---- 3 Gateway Cards ---- */
-.gatewayGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  text-align: left;
-}
-
-.gatewayCard {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 20px;
-  padding: 24px 22px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-}
-
-.gatewayCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: transparent;
-  transition: background 0.3s ease;
-}
-
-.gatewayCard:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(96, 165, 250, 0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-}
-
-.gatewayCardActive {
-  background: rgba(37, 99, 235, 0.12);
-  border-color: rgba(96, 165, 250, 0.5);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
-}
-
-.gatewayCardActive::before {
-  background: linear-gradient(90deg, #60a5fa, #2563eb);
-}
-
-.gatewayIconRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.gatewayIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(37, 99, 235, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  color: #93bbfc;
-  transition: transform 0.3s ease;
-}
-
-.gatewayCard:hover .gatewayIcon {
-  transform: scale(1.08);
-}
-
-.gatewayTag {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #93bbfc;
-  background: rgba(37, 99, 235, 0.15);
-  padding: 4px 10px;
-  border-radius: 9999px;
-  border: 1px solid rgba(96, 165, 250, 0.25);
-}
-
-.gatewayTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 8px;
-}
-
-.gatewayDesc {
-  font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.55;
-  margin-bottom: 20px;
-  flex-grow: 1;
-}
-
-.gatewayAction {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #60a5fa;
-  font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
-  font-weight: 600;
-  transition: gap 0.2s ease, color 0.2s ease;
-}
-
-.gatewayCard:hover .gatewayAction {
-  color: #ffffff;
-  gap: 12px;
 }
 
 /* Section Headers */
@@ -646,40 +519,24 @@
   letter-spacing: -0.01em;
 }
 
-@media (max-width: 992px) {
-  .gatewayGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .gatewayGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .pillSwitcher {
-    border-radius: 20px;
-    width: 100%;
-    justify-content: stretch;
-    padding: 4px;
-    gap: 4px;
-  }
-
-  .pillButton {
-    flex: 1 1 calc(50% - 6px);
-    justify-content: center;
-    padding: 8px 12px;
-    font-size: 13px;
-    gap: 6px;
-  }
-
+@media (max-width: 640px) {
   .exploreHeroBanner {
-    padding: 48px 16px 40px;
+    padding: 48px 16px 36px;
   }
 
-  .gatewayCard {
-    padding: 20px 18px;
+  .tabs {
+    width: 100%;
+    max-width: 440px;
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .tab {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 13px;
+    gap: 4px;
   }
 }
 
