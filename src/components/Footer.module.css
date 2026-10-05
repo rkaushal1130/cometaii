@@ -20,19 +20,21 @@
 }
 
 .wrap {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(24px, 3.5vw, 48px);
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 /* ---- Grid ---- */
 
 .fgrid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.5fr 1fr 1.25fr 1fr;
+  gap: clamp(32px, 3vw, 56px);
   margin-bottom: 48px;
 }
 
@@ -47,14 +49,14 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   text-decoration: none;
   cursor: pointer;
 }
 
 .logoImage {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
 }
 
@@ -62,34 +64,34 @@
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: -0.5px;
 }
 
 .fbrand p {
   font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.55);
-  max-width: 280px;
+  max-width: 380px;
 }
 
 .tagline {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
-  margin-top: -6px;
+  margin-top: -4px;
 }
 
 .desc {
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 400;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.45);
-  max-width: 300px;
+  max-width: 380px;
 }
 
 /* ---- Social icons ---- */
@@ -317,6 +319,15 @@ footer ul li a:hover svg {
 
   .wrap { padding: 0 16px; }
   .footer { padding: 40px 0 20px; }
+
+  .logoImage {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand b {
+    font-size: 21px;
+  }
 
   footer h5 {
     font-size: 14px;

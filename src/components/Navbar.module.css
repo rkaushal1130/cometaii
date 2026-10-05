@@ -21,19 +21,21 @@
 }
 
 .nav {
-  max-width: 1440px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   height: 100%;
-  padding: 0 64px;
+  padding: 0 clamp(24px, 3.5vw, 48px);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: #fff;
   text-decoration: none;
   transition: 0.3s ease;
@@ -44,9 +46,15 @@
 }
 
 .logoImage {
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.scrolled .logoImage {
+  width: 44px;
+  height: 44px;
 }
 
 .logoText {
@@ -57,7 +65,7 @@
 
 .logoMain {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
@@ -65,14 +73,19 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition: font-size 0.3s ease;
+}
+
+.scrolled .logoMain {
+  font-size: 23px;
 }
 
 .logoSub {
   font-family: "Inter", sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.25em;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
 }
 
@@ -209,13 +222,18 @@
     padding: 0 20px;
   }
 
-  .logo {
-    font-size: 20px;
+  .logoImage {
+    width: 42px;
+    height: 42px;
   }
 
-  .logoImage {
-    width: 36px;
-    height: 36px;
+  .scrolled .logoImage {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logoMain {
+    font-size: 22px;
   }
 
   .hamburger {
