@@ -11,7 +11,6 @@ import styles from '../styles/explore.module.css'
 
 export default function Explore() {
   const navigate = useNavigate()
-  const [scrolled, setScrolled] = useState(false)
 
   // Initialize active tab from URL hash if available
   const getInitialTab = () => {
@@ -28,10 +27,6 @@ export default function Explore() {
     document.title = 'Explore | Comet AI Institute'
     window.scrollTo(0, 0)
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40)
-    }
-
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase()
       if (['career', 'articles', 'blogs', 'all'].includes(hash)) {
@@ -39,28 +34,23 @@ export default function Explore() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
     window.addEventListener('hashchange', handleHashChange)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('hashchange', handleHashChange)
-    }
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
-  const handleTabChange = (tabId) => {
+  const handleSelectTab = (tabId, shouldScroll = true) => {
     setActiveTab(tabId)
     window.history.replaceState(null, '', `#${tabId}`)
 
-    // Smooth scroll to content
-    const navEl = document.getElementById('explore-nav')
-    if (navEl) {
-      const topOffset = scrolled ? 76 : 84
-      const targetY = navEl.getBoundingClientRect().top + window.scrollY - topOffset
-      window.scrollTo({
-        top: Math.max(0, targetY),
-        behavior: 'smooth'
-      })
+    if (shouldScroll) {
+      setTimeout(() => {
+        const contentEl = document.getElementById('explore-content')
+        if (contentEl) {
+          const yOffset = -90
+          const y = contentEl.getBoundingClientRect().top + window.pageYOffset + yOffset
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+        }
+      }, 50)
     }
   }
 
@@ -68,111 +58,191 @@ export default function Explore() {
     <>
       <Navbar />
       <main style={{ paddingTop: '84px' }}>
-        {/* Explore Hero Banner */}
-        <div className={styles.exploreHeroBanner}>
+        {/* Explore Hero Showcase */}
+        <section className={styles.exploreHeroBanner}>
           <div className={styles.exploreHeroInner}>
             <span className={styles.exploreBadge}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
               </svg>
-              Comet AI Knowledge &amp; Opportunities
+              Discover Comet AI
             </span>
+
             <h1 className={styles.exploreHeroTitle}>
-              Explore <span>Comet AI</span>
+              Explore <span>Our Universe</span>
             </h1>
+
             <p className={styles.exploreHeroSubtitle}>
-              Explore high-impact career opportunities, expert educational articles, and our latest AI perspectives all in one place.
+              Dive into high-impact career opportunities, deep technical articles, and our latest AI perspectives all in one place.
             </p>
-          </div>
-        </div>
 
-        {/* Sticky Explore Navigation Bar */}
-        <nav
-          id="explore-nav"
-          className={`${styles.exploreNavbarWrapper} ${scrolled ? styles.scrolledNav : ''}`}
-          aria-label="Explore Sections"
-        >
-          <div className={styles.exploreNavContainer}>
-            <div className={styles.exploreNavBrand}>
-              <span className={styles.exploreNavBrandIcon}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-                </svg>
-              </span>
-              <span>Explore Sections</span>
+            {/* Segmented Pill Filter Controls */}
+            <div className={styles.pillSwitchWrapper}>
+              <div className={styles.pillSwitcher} role="tablist" aria-label="Explore Sections">
+                <button
+                  role="tab"
+                  aria-selected={activeTab === 'career'}
+                  className={`${styles.pillButton} ${activeTab === 'career' ? styles.activePill : ''}`}
+                  onClick={() => handleSelectTab('career')}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                  <span>Careers</span>
+                </button>
+
+                <button
+                  role="tab"
+                  aria-selected={activeTab === 'articles'}
+                  className={`${styles.pillButton} ${activeTab === 'articles' ? styles.activePill : ''}`}
+                  onClick={() => handleSelectTab('articles')}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                  <span>Articles</span>
+                  <span className={styles.pillCount}>{articlesData.length}</span>
+                </button>
+
+                <button
+                  role="tab"
+                  aria-selected={activeTab === 'blogs'}
+                  className={`${styles.pillButton} ${activeTab === 'blogs' ? styles.activePill : ''}`}
+                  onClick={() => handleSelectTab('blogs')}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                  </svg>
+                  <span>Blogs</span>
+                  <span className={styles.pillCount}>{blogsData.length}</span>
+                </button>
+
+                <button
+                  role="tab"
+                  aria-selected={activeTab === 'all'}
+                  className={`${styles.pillButton} ${activeTab === 'all' ? styles.activePill : ''}`}
+                  onClick={() => handleSelectTab('all')}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                  </svg>
+                  <span>View All</span>
+                </button>
+              </div>
             </div>
 
-            <div className={styles.exploreNavLinks}>
-              {/* Career Section Nav Link */}
-              <button
-                className={`${styles.navLinkBtn} ${activeTab === 'career' ? styles.activeNavLink : ''}`}
-                onClick={() => handleTabChange('career')}
-                aria-current={activeTab === 'career' ? 'page' : undefined}
+            {/* Interactive Gateway Cards */}
+            <div className={styles.gatewayGrid}>
+              {/* Card 1: Careers */}
+              <div
+                className={`${styles.gatewayCard} ${activeTab === 'career' ? styles.gatewayCardActive : ''}`}
+                onClick={() => handleSelectTab('career')}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                </svg>
-                <span>Career Section</span>
-              </button>
+                <div>
+                  <div className={styles.gatewayIconRow}>
+                    <div className={styles.gatewayIcon}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                      </svg>
+                    </div>
+                    <span className={styles.gatewayTag}>Hiring Now</span>
+                  </div>
+                  <h3 className={styles.gatewayTitle}>Career Opportunities</h3>
+                  <p className={styles.gatewayDesc}>
+                    Join our team of researchers, educators, and engineers building next-generation AI education.
+                  </p>
+                </div>
+                <div className={styles.gatewayAction}>
+                  <span>Explore Careers</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </div>
+              </div>
 
-              {/* Article Section Nav Link */}
-              <button
-                className={`${styles.navLinkBtn} ${activeTab === 'articles' ? styles.activeNavLink : ''}`}
-                onClick={() => handleTabChange('articles')}
-                aria-current={activeTab === 'articles' ? 'page' : undefined}
+              {/* Card 2: Articles */}
+              <div
+                className={`${styles.gatewayCard} ${activeTab === 'articles' ? styles.gatewayCardActive : ''}`}
+                onClick={() => handleSelectTab('articles')}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
-                <span>Article Section</span>
-                <span className={styles.navBadge}>{articlesData.length}</span>
-              </button>
+                <div>
+                  <div className={styles.gatewayIconRow}>
+                    <div className={styles.gatewayIcon} style={{ background: 'rgba(99, 102, 241, 0.2)', color: '#a5b4fc', borderColor: 'rgba(165, 180, 252, 0.3)' }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                      </svg>
+                    </div>
+                    <span className={styles.gatewayTag} style={{ color: '#a5b4fc', borderColor: 'rgba(165, 180, 252, 0.3)' }}>
+                      {articlesData.length} Guides
+                    </span>
+                  </div>
+                  <h3 className={styles.gatewayTitle}>Technical Articles</h3>
+                  <p className={styles.gatewayDesc}>
+                    Detailed architectural comparisons, framework deep-dives, and practical tech career roadmaps.
+                  </p>
+                </div>
+                <div className={styles.gatewayAction} style={{ color: '#a5b4fc' }}>
+                  <span>Read Articles</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </div>
+              </div>
 
-              {/* Blog Section Nav Link */}
-              <button
-                className={`${styles.navLinkBtn} ${activeTab === 'blogs' ? styles.activeNavLink : ''}`}
-                onClick={() => handleTabChange('blogs')}
-                aria-current={activeTab === 'blogs' ? 'page' : undefined}
+              {/* Card 3: Blogs */}
+              <div
+                className={`${styles.gatewayCard} ${activeTab === 'blogs' ? styles.gatewayCardActive : ''}`}
+                onClick={() => handleSelectTab('blogs')}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 20h9"/>
-                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                </svg>
-                <span>Blog Section</span>
-                <span className={styles.navBadge}>{blogsData.length}</span>
-              </button>
-
-              {/* All Sections Nav Link */}
-              <button
-                className={`${styles.navLinkBtn} ${activeTab === 'all' ? styles.activeNavLink : ''}`}
-                onClick={() => handleTabChange('all')}
-                aria-current={activeTab === 'all' ? 'page' : undefined}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                </svg>
-                <span>All Sections</span>
-              </button>
+                <div>
+                  <div className={styles.gatewayIconRow}>
+                    <div className={styles.gatewayIcon} style={{ background: 'rgba(168, 85, 247, 0.2)', color: '#d8b4fe', borderColor: 'rgba(216, 180, 254, 0.3)' }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </div>
+                    <span className={styles.gatewayTag} style={{ color: '#d8b4fe', borderColor: 'rgba(216, 180, 254, 0.3)' }}>
+                      {blogsData.length} Posts
+                    </span>
+                  </div>
+                  <h3 className={styles.gatewayTitle}>Latest Blogs</h3>
+                  <p className={styles.gatewayDesc}>
+                    Perspectives on autonomous systems, student transformations, and life inside Comet AI Institute.
+                  </p>
+                </div>
+                <div className={styles.gatewayAction} style={{ color: '#d8b4fe' }}>
+                  <span>View Blogs</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
-        </nav>
+        </section>
 
-        {/* Content Area */}
+        {/* Content Destination Area */}
         <div id="explore-content">
           {/* 1. Career Section */}
           {(activeTab === 'career' || activeTab === 'all') && (
             <section id="career" className={styles.sectionContent}>
               {activeTab === 'all' && (
-                <div style={{ paddingTop: '40px', textAlign: 'center' }}>
-                  <span className={styles.sectionBadge}>CAREERS &amp; CULTURE</span>
-                  <h2 className={styles.sectionTitle}>Join Our Mission</h2>
+                <div style={{ paddingTop: '50px', textAlign: 'center' }}>
+                  <span className={styles.sectionBadge}>WORK WITH US</span>
+                  <h2 className={styles.sectionTitle}>Careers at Comet AI</h2>
                 </div>
               )}
               <CareerHero />
@@ -194,10 +264,10 @@ export default function Explore() {
             >
               {activeTab === 'all' && <hr className={styles.sectionDivider} />}
               <div className={styles.sectionHeaderWrapper}>
-                <span className={styles.sectionBadge}>KNOWLEDGE &amp; TUTORIALS</span>
-                <h2 className={styles.sectionTitle}>Featured Articles</h2>
+                <span className={styles.sectionBadge}>KNOWLEDGE BASE</span>
+                <h2 className={styles.sectionTitle}>Featured Technical Articles</h2>
                 <p className={styles.sectionSubtitle}>
-                  In-depth architectural comparisons, skills breakdowns, and forward-looking AI guides.
+                  In-depth architectural comparisons, practical skill guides, and expert engineering analysis.
                 </p>
               </div>
 
@@ -211,11 +281,11 @@ export default function Explore() {
                     <div className={styles.cardContent}>
                       <div className={styles.cardMeta}>
                         <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
                           <span>{article.date}</span>
                         </div>
                         <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                           <span>{article.author}</span>
                         </div>
                       </div>
@@ -226,7 +296,7 @@ export default function Explore() {
                         onClick={() => navigate(`/explore/article/${article.id}`)}
                       >
                         Read Article
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                       </button>
                     </div>
                   </article>
@@ -247,10 +317,10 @@ export default function Explore() {
             >
               {activeTab === 'all' && <hr className={styles.sectionDivider} />}
               <div className={styles.sectionHeaderWrapper}>
-                <span className={styles.sectionBadge}>NEWS &amp; PERSPECTIVES</span>
-                <h2 className={styles.sectionTitle}>Latest Blogs</h2>
+                <span className={styles.sectionBadge}>COMMUNITY &amp; INSIGHTS</span>
+                <h2 className={styles.sectionTitle}>Latest Blogs &amp; Stories</h2>
                 <p className={styles.sectionSubtitle}>
-                  Fresh perspectives, updates, and analysis on generative models, intelligent systems, and AI careers.
+                  Perspectives on autonomous systems, student transformations, and life inside Comet AI Institute.
                 </p>
               </div>
 
@@ -264,11 +334,11 @@ export default function Explore() {
                     <div className={styles.cardContent}>
                       <div className={styles.cardMeta}>
                         <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
                           <span>{blog.date}</span>
                         </div>
                         <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                           <span>{blog.author}</span>
                         </div>
                       </div>
@@ -279,7 +349,7 @@ export default function Explore() {
                         onClick={() => navigate(`/explore/blog/${blog.id}`)}
                       >
                         Read Blog
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                       </button>
                     </div>
                   </article>
