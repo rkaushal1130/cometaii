@@ -1,0 +1,120 @@
+.tickerSection {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 14px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  z-index: 10;
+}
+
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(90deg, #ffffff 0%, transparent 100%);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(-90deg, #ffffff 0%, transparent 100%);
+}
+
+.tickerTrack {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+  white-space: nowrap;
+}
+
+.tickerSection:hover .tickerTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.tickerItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.iconBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.iconBadge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tickerItem:hover .iconBadge {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.itemLabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.separator {
+  color: #2563eb;
+  font-size: 10px;
+  margin-left: 24px;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .tickerSection {
+    padding: 10px 0;
+  }
+  .itemLabel {
+    font-size: 12px;
+  }
+  .iconBadge {
+    width: 28px;
+    height: 28px;
+  }
+  .iconBadge svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+

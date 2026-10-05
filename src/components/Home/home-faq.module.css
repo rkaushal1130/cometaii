@@ -1,0 +1,78 @@
+.faq {
+  background: var(--soft);
+  padding: 56px 0 70px;
+  width: 100%;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.faq h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.ey {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 6px 0 30px;
+}
+
+.qa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+  margin-left: 40px;
+}
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 20px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.pm {
+  color: var(--blue);
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+details[open] summary .pm {
+  transform: rotate(45deg);
+}
+
+details .ans {
+  padding: 0 20px 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .qa {
+    margin-left: 0;
+  }
+}

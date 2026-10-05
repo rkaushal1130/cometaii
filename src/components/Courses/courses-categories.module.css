@@ -1,0 +1,199 @@
+.categoriesSection {
+  padding: 50px 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 40px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.colHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.colHeader h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.headerBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerBadge svg {
+  width: 18px;
+  height: 18px;
+}
+
+.blueBadge {
+  background: #001242;
+  color: #ffffff;
+}
+
+.purpleBadge {
+  background: #001242;
+  color: #ffffff;
+}
+
+.rocketBadge {
+  background: #001242;
+  color: #ffffff;
+}
+
+.courseList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.courseItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: #475569;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.courseItem:hover {
+  color: #1d4ed8;
+  transform: translateX(4px);
+}
+
+.itemIcon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.itemName {
+  line-height: 1.4;
+}
+
+.launchesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.launchCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.launchCard:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.launchIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.launchIconBox svg {
+  width: 22px;
+  height: 22px;
+}
+
+.launchContent {
+  flex: 1;
+}
+
+.launchTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.launchTop h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.newBadge {
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.launchContent p {
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-top: 6px;
+  transition: color 0.15s ease;
+}
+
+.viewAllBtn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

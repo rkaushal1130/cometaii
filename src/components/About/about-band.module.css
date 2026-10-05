@@ -1,0 +1,47 @@
+.band {
+  background: linear-gradient(90deg, #173a86, #1f4fae);
+  color: #fff;
+  text-align: center;
+  padding: 48px 20px;
+  width: 100%;
+}
+
+.band h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+
+  @media (max-width: 1440px) {
+    font-size: 32px;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+}
+
+.band p {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Inter', sans-serif;
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+
+  @media (max-width: 1440px) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 15px;
+  }
+}
