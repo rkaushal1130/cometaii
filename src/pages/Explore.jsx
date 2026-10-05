@@ -42,14 +42,14 @@ export default function Explore() {
     setActiveTab(tabId)
     window.history.replaceState(null, '', `#${tabId}`)
 
-    setTimeout(() => {
+    if (window.scrollY > 300) {
       const contentEl = document.getElementById('explore-content')
       if (contentEl) {
         const yOffset = -90
         const y = contentEl.getBoundingClientRect().top + window.pageYOffset + yOffset
         window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
       }
-    }, 50)
+    }
   }
 
   return (
@@ -59,19 +59,7 @@ export default function Explore() {
         {/* Simple & Elegant Hero Banner */}
         <section className={styles.exploreHeroBanner}>
           <div className={styles.exploreHeroInner}>
-            <span className={styles.exploreBadge}>
-              Discover Comet AI
-            </span>
-
-            <h1 className={styles.exploreHeroTitle}>
-              Explore <span>Comet AI</span>
-            </h1>
-
-            <p className={styles.exploreHeroSubtitle}>
-              Discover high-impact career opportunities, expert educational articles, and our latest AI perspectives all in one place.
-            </p>
-
-            {/* Clean, Simple & Attractive Segmented Control */}
+            {/* Top-Left Category Tabs */}
             <div className={styles.tabsWrapper}>
               <div className={styles.tabs} role="tablist" aria-label="Explore Categories">
                 <button
@@ -112,6 +100,21 @@ export default function Explore() {
                   <span className={styles.tabBadge}>{blogsData.length}</span>
                 </button>
               </div>
+            </div>
+
+            {/* Hero Text */}
+            <div className={styles.heroContent}>
+              <span className={styles.exploreBadge}>
+                Discover Comet AI
+              </span>
+
+              <h1 className={styles.exploreHeroTitle}>
+                Explore <span>Comet AI</span>
+              </h1>
+
+              <p className={styles.exploreHeroSubtitle}>
+                Discover high-impact career opportunities, expert educational articles, and our latest AI perspectives all in one place.
+              </p>
             </div>
           </div>
         </section>
