@@ -8,58 +8,53 @@ import styles from '../styles/explore.module.css'
 export default function ArticlePost() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const article = articlesData.find((art) => art.id === id)
+  const article = articlesData.find((art) => art.id === id) || articlesData[0]
 
   useEffect(() => {
     if (article) {
-      document.title = `${article.title} | Explore Comet AI`
+      document.title = `${article.title} | COMET AI Articles`
     } else {
-      document.title = 'Article Not Found | Comet AI'
+      document.title = 'Article Not Found | COMET AI'
     }
     window.scrollTo(0, 0)
   }, [article])
 
-  if (!article) {
-    return (
-      <>
-        <Navbar />
-        <main style={{ paddingTop: '120px', paddingBottom: '100px', textAlign: 'center' }}>
-          <h2>Article Not Found</h2>
-          <p>The article you are looking for does not exist.</p>
-          <button className={styles.backBtn} style={{ margin: '20px auto 0' }} onClick={() => navigate('/explore')}>
-            Back to Explore
-          </button>
-        </main>
-        <Footer />
-      </>
-    )
-  }
+  const otherArticles = articlesData.filter((art) => art.id !== article.id).slice(0, 2)
 
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '80px' }}>
+      <main style={{ paddingTop: '80px', paddingBottom: '90px' }}>
         <div className={styles.postDetailContainer}>
-          <button className={styles.backBtn} onClick={() => navigate('/explore')}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Back to Explore
+          <button className={styles.backBtn} onClick={() => navigate('/explore#articles')}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Explore Articles
           </button>
 
           <header className={styles.postHeader}>
             <div className={styles.postMeta}>
-              <div className={styles.cardMetaItem}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span>{article.date}</span>
-              </div>
-              <div className={styles.cardMetaItem}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span>By {article.author}</span>
-              </div>
-              <div className={styles.cardMetaItem}>
-                <span style={{ color: 'var(--accent)', fontWeight: '700' }}>{article.category}</span>
+              <span className={styles.detailCategoryBadge}>{article.category}</span>
+              <span className={styles.detailDateText}>{article.date}</span>
+              <span className={styles.detailReadTime}>• {article.readTime}</span>
+            </div>
+
+            <h1 className={styles.postTitle}>{article.title}</h1>
+
+            {/* Author Headshot Profile Bar */}
+            <div className={styles.authorProfileBar}>
+              <img
+                src={article.authorAvatar}
+                alt={article.author}
+                className={styles.detailAuthorAvatar}
+              />
+              <div className={styles.authorProfileText}>
+                <div className={styles.authorProfileName}>{article.author}</div>
+                <div className={styles.authorProfileRole}>{article.authorRole}</div>
               </div>
             </div>
-            <h1 className={styles.postTitle}>{article.title}</h1>
           </header>
 
           <div className={styles.postImageWrapper}>
@@ -70,6 +65,40 @@ export default function ArticlePost() {
             className={styles.postContent}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
+
+          {/* Author Biography Box */}
+          <div className={styles.authorBioBox}>
+            <img
+              src={article.authorAvatar}
+              alt={article.author}
+              className={styles.bioAvatar}
+            />
+            <div className={styles.bioContent}>
+              <span className={styles.bioBadge}>ABOUT THE AUTHOR</span>
+              <h3 className={styles.bioName}>{article.author}</h3>
+              <p className={styles.bioRole}>{article.authorRole}</p>
+              <p className={styles.bioDesc}>{article.authorBio}</p>
+            </div>
+          </div>
+
+          {/* Other Articles Recommendation */}
+          {otherArticles.length > 0 && (
+            <div className={styles.relatedSection}>
+              <h3 className={styles.relatedTitle}>Recommended Articles</h3>
+              <div className={styles.relatedGrid}>
+                {otherArticles.map((rel) => (
+                  <div key={rel.id} className={styles.relatedCard} onClick={() => navigate(`/article/${rel.id}`)}>
+                    <img src={rel.image} alt={rel.title} className={styles.relatedImg} />
+                    <div className={styles.relatedBody}>
+                      <span className={styles.relatedBadge}>{rel.category}</span>
+                      <h4 className={styles.relatedCardTitle}>{rel.title}</h4>
+                      <span className={styles.relatedAuthor}>By {rel.author}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

@@ -3,17 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CareerHero from '../components/Career/career-hero'
+import CareerOpenings from '../components/Career/career-openings'
 import CareerCulture from '../components/Career/career-culture'
 import CareerPrinciples from '../components/Career/career-principles'
 import CareerEnvironment from '../components/Career/career-environment'
+import ArticleFeaturedSection from '../components/Explore/article-featured-section'
+import BlogFeaturedSection from '../components/Explore/blog-featured-section'
 import { articlesData, blogsData } from '../data/exploreData'
 import styles from '../styles/explore.module.css'
 
-export default function Explore() {
+export default function Explore({ initialTab }) {
   const navigate = useNavigate()
 
-  // Initialize active tab from URL hash if available
+  // Initialize active tab from prop, URL hash or default to 'all'
   const getInitialTab = () => {
+    if (initialTab && ['all', 'career', 'articles', 'blogs'].includes(initialTab)) {
+      return initialTab
+    }
     const hash = window.location.hash.replace('#', '').toLowerCase()
     if (['all', 'career', 'articles', 'blogs'].includes(hash)) {
       return hash
@@ -42,13 +48,11 @@ export default function Explore() {
     setActiveTab(tabId)
     window.history.replaceState(null, '', `#${tabId}`)
 
-    if (window.scrollY > 300) {
-      const contentEl = document.getElementById('explore-content')
-      if (contentEl) {
-        const yOffset = -90
-        const y = contentEl.getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
-      }
+    const contentEl = document.getElementById('explore-content')
+    if (contentEl) {
+      const yOffset = -90
+      const y = contentEl.getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
     }
   }
 
@@ -131,6 +135,7 @@ export default function Explore() {
                 </div>
               )}
               <CareerHero />
+              <CareerOpenings />
               <CareerCulture />
               <CareerPrinciples />
               <CareerEnvironment />
@@ -148,9 +153,13 @@ export default function Explore() {
               }}
             >
               {activeTab === 'all' && <hr className={styles.sectionDivider} />}
-              <div className={styles.sectionHeaderWrapper}>
-                <span className={styles.sectionBadge}>KNOWLEDGE &amp; GUIDES</span>
-                <h2 className={styles.sectionTitle}>Featured Articles</h2>
+              
+              {/* Full Featured Article by Dr. Shruti Avasthi */}
+              <ArticleFeaturedSection />
+
+              <div className={styles.sectionHeaderWrapper} style={{ marginTop: '60px' }}>
+                <span className={styles.sectionBadge}>MORE ARTICLES</span>
+                <h2 className={styles.sectionTitle}>Articles Library</h2>
                 <p className={styles.sectionSubtitle}>
                   In-depth architectural comparisons, practical skill guides, and expert engineering analysis.
                 </p>
@@ -164,24 +173,30 @@ export default function Explore() {
                       <span className={styles.cardBadge}>{article.category}</span>
                     </div>
                     <div className={styles.cardContent}>
-                      <div className={styles.cardMeta}>
-                        <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-                          <span>{article.date}</span>
-                        </div>
-                        <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                          <span>{article.author}</span>
+                      {/* Author Headshot & Meta */}
+                      <div className={styles.authorBadgeRow} style={{ marginBottom: '12px' }}>
+                        <img
+                          src={article.authorAvatar}
+                          alt={article.author}
+                          className={styles.authorHeadshotSmall}
+                        />
+                        <div>
+                          <strong className={styles.authorNameSmall}>{article.author}</strong>
+                          <span className={styles.metaSub}>{article.date} • {article.readTime}</span>
                         </div>
                       </div>
+
                       <h3 className={styles.cardTitle}>{article.title}</h3>
                       <p className={styles.cardExcerpt}>{article.excerpt}</p>
                       <button
                         className={styles.readMoreBtn}
-                        onClick={() => navigate(`/explore/article/${article.id}`)}
+                        onClick={() => navigate(`/article/${article.id}`)}
                       >
                         Read Article
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
                       </button>
                     </div>
                   </article>
@@ -201,9 +216,13 @@ export default function Explore() {
               }}
             >
               {activeTab === 'all' && <hr className={styles.sectionDivider} />}
-              <div className={styles.sectionHeaderWrapper}>
-                <span className={styles.sectionBadge}>COMMUNITY &amp; INSIGHTS</span>
-                <h2 className={styles.sectionTitle}>Latest Blogs</h2>
+
+              {/* Full Featured Blog by Ms. Shivani Tayal */}
+              <BlogFeaturedSection />
+
+              <div className={styles.sectionHeaderWrapper} style={{ marginTop: '60px' }}>
+                <span className={styles.sectionBadge}>MORE BLOGS</span>
+                <h2 className={styles.sectionTitle}>Latest Blogs &amp; Stories</h2>
                 <p className={styles.sectionSubtitle}>
                   Perspectives on autonomous systems, student transformations, and life inside Comet AI Institute.
                 </p>
@@ -217,24 +236,30 @@ export default function Explore() {
                       <span className={styles.cardBadge}>{blog.category}</span>
                     </div>
                     <div className={styles.cardContent}>
-                      <div className={styles.cardMeta}>
-                        <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-                          <span>{blog.date}</span>
-                        </div>
-                        <div className={styles.cardMetaItem}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                          <span>{blog.author}</span>
+                      {/* Author Headshot & Meta */}
+                      <div className={styles.authorBadgeRow} style={{ marginBottom: '12px' }}>
+                        <img
+                          src={blog.authorAvatar}
+                          alt={blog.author}
+                          className={styles.authorHeadshotSmall}
+                        />
+                        <div>
+                          <strong className={styles.authorNameSmall}>{blog.author}</strong>
+                          <span className={styles.metaSub}>{blog.date} • {blog.readTime}</span>
                         </div>
                       </div>
+
                       <h3 className={styles.cardTitle}>{blog.title}</h3>
                       <p className={styles.cardExcerpt}>{blog.excerpt}</p>
                       <button
                         className={styles.readMoreBtn}
-                        onClick={() => navigate(`/explore/blog/${blog.id}`)}
+                        onClick={() => navigate(`/blog/${blog.id}`)}
                       >
                         Read Blog
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
                       </button>
                     </div>
                   </article>

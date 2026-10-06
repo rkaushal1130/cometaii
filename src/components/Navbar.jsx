@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link to="/beyond-learning" className={isActive("/beyond-learning") ? styles.active : ""}>
             Beyond Learning
           </Link>
-          <Link to="/explore" className={isActive("/explore") ? styles.active : ""}>Explore</Link>
+          <Link to="/explore" className={isActive("/explore") || location.pathname.startsWith("/explore") ? styles.active : ""}>Explore</Link>
           <Link to="/contact" className={isActive("/contact") ? styles.active : ""}>
             Contact Us
           </Link>

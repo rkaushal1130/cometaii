@@ -473,6 +473,143 @@
   font-weight: 700;
 }
 
+.postContent h4 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.postContent ul,
+.postContent ol {
+  margin-bottom: 28px;
+  padding-left: 24px;
+}
+
+.postContent li {
+  margin-bottom: 12px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.postContent :global(.calloutBox) {
+  background: #f0f7ff;
+  border-left: 4px solid #1d4ed8;
+  border-radius: 0 16px 16px 0;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.postContent :global(.calloutBox) h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #1e3a8a;
+}
+
+.postContent :global(.calloutBox) p {
+  margin-bottom: 12px;
+  color: #334155;
+}
+
+.postContent :global(.calloutBox) p:last-child {
+  margin-bottom: 0;
+}
+
+.postContent :global(.stepProcess) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 16px 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 20px 0 28px;
+}
+
+.postContent :global(.processStep) {
+  background: rgba(56, 189, 248, 0.15);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.postContent :global(.combinationGrid) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 28px;
+}
+
+.postContent :global(.combBadge) {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.postContent :global(.quoteBlock) {
+  border-left: 4px solid #2563eb;
+  padding-left: 20px;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 28px 0;
+}
+
+.postContent :global(.articleCtaBanner) {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 20px;
+  padding: 36px 32px;
+  color: #ffffff;
+  margin-top: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
+}
+
+.postContent :global(.articleCtaBanner) h4 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.postContent :global(.articleCtaBanner) p {
+  color: #cbd5e1;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.postContent :global(.articleCtaBanner) :global(.tagline) {
+  color: #38bdf8;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.postContent :global(.articleCtaBanner) :global(.brandSignature) {
+  color: #93c5fd;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.postContent :global(.articleCtaBanner) :global(.websiteLink) a {
+  color: #38bdf8;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -549,6 +686,366 @@
     padding: 9px 12px;
     font-size: 13px;
     gap: 4px;
+  }
+}
+
+/* Author Headshot Badges & Rows */
+.authorBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorHeadshot {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.authorHeadshotSmall {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.authorName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+}
+
+.authorTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #64748b;
+  display: block;
+}
+
+.authorNameSmall {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+}
+
+.metaSub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #64748b;
+  display: block;
+}
+
+/* Featured Spotlight */
+.featuredSpotlight {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.featuredSpotlight:hover {
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  border-color: #cbd5e1;
+}
+
+.spotlightImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  max-height: 400px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.spotlightImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.featuredSpotlight:hover .spotlightImage {
+  transform: scale(1.04);
+}
+
+.spotlightBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.spotlightContent {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.spotlightTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.spotlightExcerpt {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #475569;
+  margin-bottom: 24px;
+}
+
+/* Detail Post Header & Author Profile */
+.detailCategoryBadge {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.detailDateText {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  margin-left: 10px;
+}
+
+.detailReadTime {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #94a3b8;
+  margin-left: 6px;
+}
+
+.authorProfileBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.detailAuthorAvatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1d4ed8;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);
+}
+
+.authorProfileText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.authorProfileName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.authorProfileRole {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Author Biography Box at bottom of article */
+.authorBioBox {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 32px;
+  margin: 50px 0 40px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.bioAvatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+  flex-shrink: 0;
+}
+
+.bioContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bioBadge {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+  margin-bottom: 2px;
+}
+
+.bioName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.bioRole {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  margin: 0 0 6px;
+}
+
+.bioDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+/* Related Section */
+.relatedSection {
+  margin-top: 60px;
+  padding-top: 36px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.relatedTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.relatedCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.relatedCard:hover {
+  transform: translateY(-3px);
+  border-color: #93bbfc;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.relatedImg {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.relatedBody {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.relatedBadge {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.relatedCardTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.relatedAuthor {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .featuredSpotlight {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .spotlightImageWrapper {
+    height: 240px;
+    min-height: auto;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .authorBioBox {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
 }
 

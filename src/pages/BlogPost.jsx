@@ -8,58 +8,53 @@ import styles from '../styles/explore.module.css'
 export default function BlogPost() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const blog = blogsData.find((b) => b.id === id)
+  const blog = blogsData.find((b) => b.id === id) || blogsData[0]
 
   useEffect(() => {
     if (blog) {
-      document.title = `${blog.title} | Explore Comet AI`
+      document.title = `${blog.title} | COMET AI Blogs`
     } else {
-      document.title = 'Blog Not Found | Comet AI'
+      document.title = 'Blog Not Found | COMET AI'
     }
     window.scrollTo(0, 0)
   }, [blog])
 
-  if (!blog) {
-    return (
-      <>
-        <Navbar />
-        <main style={{ paddingTop: '120px', paddingBottom: '100px', textAlign: 'center' }}>
-          <h2>Blog Not Found</h2>
-          <p>The blog post you are looking for does not exist.</p>
-          <button className={styles.backBtn} style={{ margin: '20px auto 0' }} onClick={() => navigate('/explore')}>
-            Back to Explore
-          </button>
-        </main>
-        <Footer />
-      </>
-    )
-  }
+  const otherBlogs = blogsData.filter((b) => b.id !== blog.id).slice(0, 2)
 
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '80px' }}>
+      <main style={{ paddingTop: '80px', paddingBottom: '90px' }}>
         <div className={styles.postDetailContainer}>
-          <button className={styles.backBtn} onClick={() => navigate('/explore')}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Back to Explore
+          <button className={styles.backBtn} onClick={() => navigate('/explore#blogs')}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Explore Blogs
           </button>
 
           <header className={styles.postHeader}>
             <div className={styles.postMeta}>
-              <div className={styles.cardMetaItem}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                <span>{blog.date}</span>
-              </div>
-              <div className={styles.cardMetaItem}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span>By {blog.author}</span>
-              </div>
-              <div className={styles.cardMetaItem}>
-                <span style={{ color: 'var(--accent)', fontWeight: '700' }}>{blog.category}</span>
+              <span className={styles.detailCategoryBadge}>{blog.category}</span>
+              <span className={styles.detailDateText}>{blog.date}</span>
+              <span className={styles.detailReadTime}>• {blog.readTime}</span>
+            </div>
+
+            <h1 className={styles.postTitle}>{blog.title}</h1>
+
+            {/* Author Headshot Profile Bar */}
+            <div className={styles.authorProfileBar}>
+              <img
+                src={blog.authorAvatar}
+                alt={blog.author}
+                className={styles.detailAuthorAvatar}
+              />
+              <div className={styles.authorProfileText}>
+                <div className={styles.authorProfileName}>{blog.author}</div>
+                <div className={styles.authorProfileRole}>{blog.authorRole}</div>
               </div>
             </div>
-            <h1 className={styles.postTitle}>{blog.title}</h1>
           </header>
 
           <div className={styles.postImageWrapper}>
@@ -70,6 +65,40 @@ export default function BlogPost() {
             className={styles.postContent}
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
+
+          {/* Author Biography Box */}
+          <div className={styles.authorBioBox}>
+            <img
+              src={blog.authorAvatar}
+              alt={blog.author}
+              className={styles.bioAvatar}
+            />
+            <div className={styles.bioContent}>
+              <span className={styles.bioBadge}>ABOUT THE AUTHOR</span>
+              <h3 className={styles.bioName}>{blog.author}</h3>
+              <p className={styles.bioRole}>{blog.authorRole}</p>
+              <p className={styles.bioDesc}>{blog.authorBio}</p>
+            </div>
+          </div>
+
+          {/* Other Blogs Recommendation */}
+          {otherBlogs.length > 0 && (
+            <div className={styles.relatedSection}>
+              <h3 className={styles.relatedTitle}>Recommended Blogs</h3>
+              <div className={styles.relatedGrid}>
+                {otherBlogs.map((rel) => (
+                  <div key={rel.id} className={styles.relatedCard} onClick={() => navigate(`/blog/${rel.id}`)}>
+                    <img src={rel.image} alt={rel.title} className={styles.relatedImg} />
+                    <div className={styles.relatedBody}>
+                      <span className={styles.relatedBadge}>{rel.category}</span>
+                      <h4 className={styles.relatedCardTitle}>{rel.title}</h4>
+                      <span className={styles.relatedAuthor}>By {rel.author}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

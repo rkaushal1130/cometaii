@@ -10,13 +10,23 @@ export default function CareerHero() {
 
       <div className={styles.wrap}>
         <div className={styles.content}>
+          <span className={styles.heroBadge}>CAREERS &amp; MENTORSHIP</span>
           <h1 className={styles.title}>
-            Launch Your Career <br />
-            with <span className={styles.gradientText}>Comet AI.</span>
+            Build Your Future <br />
+            With <span className={styles.gradientText}>COMET AI.</span>
           </h1>
           <p className={styles.desc}>
-            Build your future with industry experts. Join our team and create innovative learning experiences that inspire the next generation of tech professionals.
+            At COMET AI, we believe in creating an environment where passionate educators, trainers, mentors, and technology professionals can grow, innovate, and make an impact.
           </p>
+          <div className={styles.heroActions}>
+            <a href="#career-openings" className={styles.heroBtnPrimary}>
+              Explore Open Roles
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+            </a>
+            <a href="#work-with-us" className={styles.heroBtnSecondary}>
+              Send CV / Profile
+            </a>
+          </div>
         </div>
 
         <div className={styles.graphicContainer}>
